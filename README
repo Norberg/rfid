@@ -1,0 +1,13 @@
+This library prefers if it can find the rfid device at 
+/dev/rfid its possible to change PORT in rfid.py to point to
+elsewhere but not recommended since it will differ depending on
+other device connected, instead write a udev rule that takes
+care of it.
+
+Create a new file in /etc/udev/rules.d called local.rulse and put:
+SUBSYSTEMS=="usb",ATTRS{interface}=="TTL232R",KERNEL=="ttyUSB*",SYMLINK+="rfid"
+
+Where ATTRS{interface} is the same as found with:
+sudo udevadm info -a -p /sys/class/tty/ttyUSB0
+
+Then replugg the device and /dev/rfid should appear.
