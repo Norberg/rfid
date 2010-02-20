@@ -8,6 +8,6 @@ Create a new file in /etc/udev/rules.d called local.rulse and put:
 SUBSYSTEMS=="usb",ATTRS{interface}=="TTL232R",KERNEL=="ttyUSB*",SYMLINK+="rfid"
 
 Where ATTRS{interface} is the same as found with:
-sudo udevadm info -a -p /sys/class/tty/ttyUSB0
+sudo udevadm info -a -p /sys/class/tty/ttyUSB0 | grep interface
 
-Then replugg the device and /dev/rfid should appear.
+Then replug the device and /dev/rfid should appear.
