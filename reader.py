@@ -8,7 +8,14 @@ file = open("tags.dat", "rb")
 tags = pickle.load(file)
 
 while 1:
-	tag = rfid.readTag()
+	try:
+		tag = rfid.readTag()
+	except IOError:
+		print "IOError"
+		continue 
+	except:
+		print "Exception on rfid.readTag()"
+		continue 
 	if len(tag) == 10:
 		if tags.has_key(tag):
 			try:
